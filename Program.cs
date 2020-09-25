@@ -69,7 +69,7 @@ namespace Task_36
                 {
                     liveOrDie = "Умерла";
                 }
-                Console.WriteLine($"номер рыбки {i}, {liveOrDie}, максимальный срок жизни {_fish[i].MaxAge}");
+                Console.WriteLine($"номер рыбки {i}, {liveOrDie}, максимальный срок жизни {_fish[i]._maxAge}");
             }
         }        
         public void AddFish(int countFish)
@@ -111,17 +111,6 @@ namespace Task_36
             get
             {
                 return _age;
-            }
-            private set
-            {
-
-            }
-        }
-        public int MaxAge
-        {
-            get
-            {
-                return _maxAge;
             }
             private set
             {
