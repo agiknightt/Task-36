@@ -48,11 +48,10 @@ namespace Task_36
             }
         }
     }
-    class Aquarium
+    class Aquarium : Fish
     {
-        protected List<Fish> _fish = new List<Fish>();
-        protected int _countFish;
-        protected int _maxAge;
+        private List<Fish> _fish = new List<Fish>();
+        private int _countFish;        
         public Aquarium()
         {
             Random rand = new Random();
@@ -63,13 +62,7 @@ namespace Task_36
         {
             for (int i = 0; i < _fish.Count; i++)
             {
-                string liveOrDie = Convert.ToString(_fish[i].Age) + " лет";
-
-                if (_fish[i].IsDie == true)
-                {
-                    liveOrDie = "Умерла";
-                }
-                Console.WriteLine($"номер рыбки {i}, {liveOrDie}, максимальный срок жизни {_fish[i]._maxAge}");
+                ShowInfo(i);
             }
         }        
         public void AddFish(int countFish)
@@ -81,7 +74,20 @@ namespace Task_36
         }
         public void DeleteFish(int numberFish)
         {
-            _fish.RemoveAt(numberFish);
+            bool isFound = false;
+            for (int i = 0; i < _fish.Count; i++)
+            {
+                if (i == numberFish)
+                {
+                    _fish.RemoveAt(numberFish);
+                    Console.WriteLine($"Вы убрали рыбку из аквариума под номером {i}.");
+                    isFound = true;
+                }                    
+            }
+            if(isFound == false)
+            {
+                Console.WriteLine("Рыбы с таким номером нет.");
+            }
         }
         public void SkipTimeAllFish()
         {
@@ -91,32 +97,11 @@ namespace Task_36
             }                
         }
     }
-    class Fish : Aquarium
+    class Fish
     {
-        private int _age;        
-        private bool _isDie = false;
-        public bool IsDie
-        {
-            get
-            {
-                return _isDie;
-            }
-            private set
-            {
-
-            }
-        }
-        public int Age
-        {
-            get
-            {
-                return _age;
-            }
-            private set
-            {
-
-            }
-        }
+        protected int _age;
+        protected bool _isDie = false;
+        protected int _maxAge;
         public Fish()
         {
             Random rand = new Random();
@@ -135,6 +120,15 @@ namespace Task_36
                 _age += 1;
             }
         }
-    }
+        public void ShowInfo(int numberFish)
+        {
+            string liveOrDie = Convert.ToString(_age) + " лет";
 
+            if (_isDie == true)
+            {
+                liveOrDie = "Умерла";
+            }
+            Console.WriteLine($"номер рыбки {numberFish}, {liveOrDie}, максимальный срок жизни {_maxAge}");
+        }
+    }
 }
