@@ -18,7 +18,7 @@ namespace Task_36
 
             while (exitOrEnter)
             {
-                aquarium.ShowAquarium();
+                aquarium.ShowAllFish();
                 Console.WriteLine("\n\nВыберите что хотите сделать : \n\n1. Добавить рыбку в аквариум\n\n2. Убрать рыбку из аквариума\n\n3. Прокрутить время\n\n4. Выйти из приложения");
                 
                 switch (Convert.ToInt32(Console.ReadLine()))
@@ -50,15 +50,9 @@ namespace Task_36
     }
     class Aquarium 
     {
-        private List<Fish> _fish = new List<Fish>();
-        private int _countFish;        
-        public Aquarium()
-        {
-            Random rand = new Random();
-
-            _countFish = rand.Next(1,10);
-        }
-        public void ShowAquarium()
+        private List<Fish> _fish = new List<Fish>();     
+        
+        public void ShowAllFish()
         {
             for (int i = 0; i < _fish.Count; i++)
             {
@@ -74,17 +68,12 @@ namespace Task_36
         }
         public void DeleteFish(int numberFish)
         {
-            bool isFound = false;
-            for (int i = 0; i < _fish.Count; i++)
+            if (_fish.Count >= numberFish && numberFish >= 0)
             {
-                if (i == numberFish)
-                {
-                    _fish.RemoveAt(numberFish);
-                    Console.WriteLine($"Вы убрали рыбку из аквариума под номером {i}.");
-                    isFound = true;
-                }                    
+                _fish.RemoveAt(numberFish);
+                Console.WriteLine($"Вы убрали рыбку из аквариума под номером {numberFish}.");
             }
-            if(isFound == false)
+            else
             {
                 Console.WriteLine("Рыбы с таким номером нет.");
             }
@@ -99,9 +88,9 @@ namespace Task_36
     }
     class Fish
     {
-        protected int _age;
-        protected bool _isDie = false;
-        protected int _maxAge;
+        private int _age;
+        private bool _isDie = false;
+        private int _maxAge;
         public Fish()
         {
             Random rand = new Random();
