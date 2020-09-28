@@ -48,7 +48,7 @@ namespace Task_36
             }
         }
     }
-    class Aquarium : Fish
+    class Aquarium 
     {
         private List<Fish> _fish = new List<Fish>();
         private int _countFish;        
@@ -62,9 +62,9 @@ namespace Task_36
         {
             for (int i = 0; i < _fish.Count; i++)
             {
-                ShowInfo(i);
+                _fish[i].ShowInfo(i);
             }
-        }        
+        }
         public void AddFish(int countFish)
         {
             for (int i = 0; i < countFish; i++)
